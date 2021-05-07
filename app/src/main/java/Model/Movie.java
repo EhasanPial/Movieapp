@@ -3,6 +3,8 @@ package Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.recyclerview.widget.DiffUtil;
+
 public class Movie implements Parcelable {
 
     private int id;
@@ -80,4 +82,18 @@ public class Movie implements Parcelable {
         dest.writeFloat(popularity);
         dest.writeFloat(vote_average);
     }
+
+
+    public static final DiffUtil.ItemCallback<Movie> CALLBACK=new DiffUtil.ItemCallback<Movie>() {
+        @Override
+        public boolean areItemsTheSame(Movie oldItem, Movie newItem) {
+            return oldItem.id == newItem.id;
+        }
+
+        @Override
+        public boolean areContentsTheSame(Movie oldItem, Movie newItem) {
+            return true;
+        }
+    };
+
 }

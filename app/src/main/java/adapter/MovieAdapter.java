@@ -66,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         if (mMovies == null) {
             return 0;
         }
-        return mMovies.size();
+        return 12;
     }
 
     public void setMovieItem(List<Movie> movie) {

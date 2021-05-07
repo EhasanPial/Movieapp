@@ -37,10 +37,17 @@ public class ApiService {
         }
         return apiService;
     }
+    public static  ApiInterface getApiInterface()
+    {
+        if (apiService == null) {
+            apiService = new ApiService();
+        }
+        return apiInterface;
+    }
 
-    public LiveData<List<Movie>> getPopularMovies(String apiKey) {
+    public LiveData<List<Movie>> getPopularMovies(String apiKey,  Long page) {
         final MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
-        apiInterface.getpopularmovies(apiKey).enqueue(new Callback<MovieList>() {
+        apiInterface.getpopularmovies(apiKey,page).enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
                 int statusCode = response.code();
@@ -57,7 +64,31 @@ public class ApiService {
             }
         });
         return mutableLiveData;
+
+
     }
 
+    public LiveData<List<Movie>> getTopRatedMovies(String apiKey,  Long page) {
+        final MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
+        apiInterface.gettopratedmovies(apiKey,page).enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                int statusCode = response.code();
+                Log.d(ApiService.class.getSimpleName(), "onResponse: " + statusCode);
+                if (response.isSuccessful())
+                    mutableLiveData.setValue(response.body().getMovieResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+                mutableLiveData.setValue(null);
+                Log.e(ApiService.class.getSimpleName(), "onResponse: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+        return mutableLiveData;
+
+
+    }
 
 }

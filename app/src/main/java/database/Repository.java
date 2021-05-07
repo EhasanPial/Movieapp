@@ -21,8 +21,12 @@ public class Repository {
 
 
 
-    public LiveData<List<Movie>> getPopularMovies(String apiKey) {
-        return apiService.getPopularMovies(apiKey);
+    public LiveData<List<Movie>> getPopularMovies(String apiKey,  Long page) {
+        return apiService.getPopularMovies(apiKey, page );
+
+    }
+    public LiveData<List<Movie>> getTopRatedMovies(String apiKey,  Long page) {
+        return apiService.getTopRatedMovies(apiKey, page );
     }
 
 }

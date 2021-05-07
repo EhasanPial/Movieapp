@@ -5,16 +5,29 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.movieapp.R;
 
-public class TopRatedMovies extends Fragment {
+import Model.Movie;
+import adapter.PagingAdapterMovies;
 
+public class TopRatedMovies extends Fragment implements PagingAdapterMovies.ListClickListener{
 
+    private PagingAdapterMovies pagingAdapterMovies ;
+    private  TopViewModel topViewModel ;
+
+    //////// UI //////////
+    private RecyclerView recyclerView ;
 
 
     @Override
@@ -27,5 +40,34 @@ public class TopRatedMovies extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = view.findViewById(R.id.top_movie_fragment_recycler_id) ;
+
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        recyclerView.setHasFixedSize(true);
+        pagingAdapterMovies = new PagingAdapterMovies(getActivity().getApplicationContext(), this::onListClick);
+        recyclerView.setAdapter(pagingAdapterMovies);
+
+        loadPopularMovies();
+    }
+
+    private void loadPopularMovies() {
+        topViewModel = ViewModelProviders.of(this).get(TopViewModel.class);
+
+        topViewModel.getMoviesPagedList().observe(getViewLifecycleOwner(), new Observer<PagedList<Movie>>() {
+            @Override
+            public void onChanged(PagedList<Movie> movies) {
+                pagingAdapterMovies.submitList(movies);
+            }
+        });
+
+    }
+
+    @Override
+    public void onListClick(Movie movie) {
+        Toast.makeText(getContext(), movie.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }
