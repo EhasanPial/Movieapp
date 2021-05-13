@@ -69,5 +69,7 @@ dependencies {
     def paging_version = "1.0.1"
     implementation "android.arch.paging:runtime:$paging_version"
 
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
 
 }

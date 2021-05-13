@@ -1,6 +1,7 @@
 package ui;
 
 import android.app.Application;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,11 +24,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.movieapp.R;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Movie;
 import adapter.MovieAdapter;
+import adapter.SliderAdapter;
 import server.BaseString;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
@@ -39,6 +45,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     private final String apikey = BaseString.API;
     private MovieAdapter movieAdapter;
     private MovieAdapter TopmovieAdapter;
+    private SliderAdapter sliderAdapter;
 
 
 
@@ -69,6 +76,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
 
         pop_see_all = view.findViewById(R.id.popSeeAllID) ;
 
+        /* ----- Pop Movies Recycler ----*/
         top_moives_recycler = view.findViewById(R.id.top_recycler_id);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 3);
         top_moives_recycler.setLayoutManager(gridLayoutManager2);
@@ -76,8 +84,26 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
         TopmovieAdapter = new MovieAdapter(getActivity().getApplicationContext(), this::onListClick);
         top_moives_recycler.setAdapter(TopmovieAdapter);
 
+        /* ----- seall id ----*/
         pop_see_all = view.findViewById(R.id.popSeeAllID) ;
         top_see_all = view.findViewById(R.id.topSeeAllID) ;
+
+        /* ----- Slider ----*/
+
+        SliderView sliderView = view.findViewById(R.id.imageSlider);
+
+        sliderAdapter = new SliderAdapter(getContext());
+
+        sliderView.setSliderAdapter(sliderAdapter);
+
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(4);
+        sliderView.startAutoCycle();
+
 
         loadPopularMovies();
         loadTopMovies();
@@ -128,6 +154,12 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
             else {
                 Toast.makeText(getContext(), "Not Empty", Toast.LENGTH_SHORT).show();
                 movieAdapter.setMovieItem(movies);
+                List<Movie> movies1 = new ArrayList<>();
+                for(int i = 0 ; i<6; i++)
+                {
+                    movies1.add(movies.get(i)) ;
+                }
+                sliderAdapter.setMovies(movies1);
             }
 
         });
