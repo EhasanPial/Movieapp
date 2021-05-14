@@ -40,18 +40,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(toolbar,navController,appBarConfiguration);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                int id= destination.getId() ;
 
-                    if(id == R.id.popularMovies)
-                    {
-                       // Toast.makeText(MainActivity.this, "here", Toast.LENGTH_SHORT).show() ;
-
-                    }
-            }
-        });
 
     }
 
