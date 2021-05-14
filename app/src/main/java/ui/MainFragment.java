@@ -170,5 +170,8 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     @Override
     public void onListClick(Movie movie) {
         Toast.makeText(getContext(), movie.getTitle(), Toast.LENGTH_SHORT).show();
+
+        MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

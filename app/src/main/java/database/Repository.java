@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import Model.Movie;
+import Model.MovieDetails;
 import server.ApiService;
 
 public class Repository {
@@ -27,6 +28,9 @@ public class Repository {
     }
     public LiveData<List<Movie>> getTopRatedMovies(String apiKey,  Long page) {
         return apiService.getTopRatedMovies(apiKey, page );
+    }
+    public LiveData<MovieDetails> getMovieDetails(String apiKey, int id) {
+        return apiService.getMovieDetails(apiKey, id );
     }
 
 }

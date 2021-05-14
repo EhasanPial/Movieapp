@@ -16,15 +16,35 @@
         <action
             android:id="@+id/action_mainFragment_to_topRatedMovies"
             app:destination="@id/topRatedMovies" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
     <fragment
         android:id="@+id/popularMovies"
         android:name="ui.PopularMovies"
         android:label="Popular Movies"
-        tools:layout="@layout/fragment_popular_movies" />
+        tools:layout="@layout/fragment_popular_movies" >
+        <action
+            android:id="@+id/action_popularMovies_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+    </fragment>
     <fragment
         android:id="@+id/topRatedMovies"
         android:name="ui.TopRatedMovies"
         android:label="Top Rated Movies"
-        tools:layout="@layout/fragment_top_rated_movies" />
+        tools:layout="@layout/fragment_top_rated_movies" >
+        <action
+            android:id="@+id/action_topRatedMovies_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsActivity"
+        android:name="ui.DetailsActivity"
+        android:label="fragment_details_activity"
+        tools:layout="@layout/fragment_details_activity" >
+        <argument
+            android:name="moviepass"
+            app:argType="Model.Movie" />
+    </fragment>
 </navigation>

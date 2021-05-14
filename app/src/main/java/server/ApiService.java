@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import Model.Movie;
+import Model.MovieDetails;
 import Model.MovieList;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,6 +90,29 @@ public class ApiService {
         return mutableLiveData;
 
 
+    }
+
+    public LiveData<MovieDetails> getMovieDetails(String apiKey, int id)
+    {
+        final MutableLiveData<MovieDetails> movieDetailsMutableLiveData = new MutableLiveData<>() ;
+        apiInterface.getMovieDetails(id,apiKey).enqueue(new Callback<MovieDetails>() {
+            @Override
+            public void onResponse(Call<MovieDetails> call, Response<MovieDetails> response) {
+                int statusCode = response.code();
+                Log.d(ApiService.class.getSimpleName(), "onResponse: " + statusCode);
+                if (response.isSuccessful())
+                    movieDetailsMutableLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<MovieDetails> call, Throwable t) {
+                movieDetailsMutableLiveData.setValue(null);
+                Log.e(ApiService.class.getSimpleName(), "onResponse: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+        return movieDetailsMutableLiveData ;
     }
 
 }
