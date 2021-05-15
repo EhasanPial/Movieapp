@@ -11,11 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapp.R;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Cast;
 import Model.Movie;
+import server.BaseString;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.MyViewHolder> {
 
@@ -30,7 +33,8 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.MyViewHolder> 
     }
 
     public void setCasts(List<Model.Cast> casts) {
-        this.casts = casts;
+
+        this.casts = casts ;
         notifyDataSetChanged();
 
     }
@@ -49,10 +53,17 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.MyViewHolder> 
         holder.org_name.setText(cast.getOriginal_name());
         holder.name.setText(cast.getName());
 
+        Picasso.get()
+                .load(BaseString.PROFILE_PATH + cast.getProfile_path())
+                .error(R.drawable.drop_shadow)
+                .into(holder.profile);
+
     }
 
     @Override
     public int getItemCount() {
+        if(casts == null)
+            return  0 ;
         return casts.size();
     }
 

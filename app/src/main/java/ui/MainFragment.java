@@ -39,7 +39,7 @@ import server.BaseString;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 
-public class MainFragment extends Fragment implements MovieAdapter.ListClickListener {
+public class MainFragment extends Fragment implements MovieAdapter.ListClickListener, SliderAdapter.ListClick {
 
     private MainFragmentViewModel mainFragmentViewModel;
     private final String apikey = BaseString.API;
@@ -92,7 +92,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
 
         SliderView sliderView = view.findViewById(R.id.imageSlider);
 
-        sliderAdapter = new SliderAdapter(getContext());
+        sliderAdapter = new SliderAdapter(getContext() ,this::onListClick);
 
         sliderView.setSliderAdapter(sliderAdapter);
 
@@ -173,8 +173,14 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
 
     @Override
     public void onListClick(Movie movie) {
-        Toast.makeText(getContext(), movie.getTitle(), Toast.LENGTH_SHORT).show();
 
+        MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
+        Navigation.findNavController(getView()).navigate(action);
+    }
+
+
+    @Override
+    public void onSliderListClick(Movie movie) {
         MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
         Navigation.findNavController(getView()).navigate(action);
     }

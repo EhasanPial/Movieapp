@@ -7,13 +7,13 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import Model.Cast;
-import Model.CastList;
 import Model.Movie;
 import Model.MovieDetails;
+import Model.Review;
 import server.ApiService;
 
 public class Repository {
-    private ApiService apiService = ApiService.getInstance();
+    private final ApiService apiService = ApiService.getInstance();
 
     public Repository(Application application) {
 
@@ -35,6 +35,10 @@ public class Repository {
 
     public LiveData<List<Cast>> getCast(String apiKey, int id) {
         return apiService.getCredits(apiKey, id);
+    }
+
+    public LiveData<List<Review>> getRevies(String apiKey, int id) {
+        return apiService.getReviews(apiKey, id);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 public class MovieDetails {
 
     List<Genre> genres;
+    int id ;
     String release_date;
     int runtime;
     float budget;
@@ -12,7 +13,7 @@ public class MovieDetails {
     String status;
     String original_title;
 
-    public MovieDetails(List<Genre> genres, String release_date, int runtime, float budget, float revenue, String status, String original_title) {
+    public MovieDetails(List<Genre> genres, String release_date, int runtime, float budget, float revenue, String status, String original_title, int id) {
         this.genres = genres;
         this.release_date = release_date;
         this.runtime = runtime;
@@ -20,6 +21,7 @@ public class MovieDetails {
         this.revenue = revenue;
         this.status = status;
         this.original_title = original_title;
+        this.id = id;
     }
 
     public List<Genre> getGenres() {
@@ -48,5 +50,9 @@ public class MovieDetails {
 
     public String getOriginal_title() {
         return original_title;
+    }
+
+    public int getId() {
+        return id;
     }
 }

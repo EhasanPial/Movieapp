@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.navigation.Navigation;
+
 import com.example.movieapp.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
@@ -18,15 +20,18 @@ import java.util.List;
 
 import Model.Movie;
 import server.BaseString;
+import ui.MainFragmentDirections;
 
 public class SliderAdapter extends
         SliderViewAdapter<SliderAdapter.SliderAdapterVH> {
 
     private Context context;
     private List<Movie> mSliderItems = new ArrayList<>();
+    private ListClick listClick ;
 
-    public SliderAdapter(Context context ) {
+    public SliderAdapter(Context context, ListClick listClick ) {
         this.context = context;
+        this.listClick = listClick ;
 
     }
 
@@ -59,13 +64,17 @@ public class SliderAdapter extends
                 .load(posterUrl + movie.getPoster_path())
                 .error(R.drawable.bg_overlay)
                 .into(viewHolder.imageViewBackground);
-
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, movie.getTitle(), Toast.LENGTH_SHORT).show();
+                listClick.onSliderListClick(mSliderItems.get(position));
             }
         });
+
+    }
+
+    public interface ListClick {
+        void onSliderListClick(Movie movie) ;
     }
 
     @Override
@@ -73,6 +82,8 @@ public class SliderAdapter extends
 
         return mSliderItems.size();
     }
+
+
 
     class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
 
@@ -88,8 +99,13 @@ public class SliderAdapter extends
             imageGifContainer = itemView.findViewById(R.id.iv_gif_container);
             textViewDescription = itemView.findViewById(R.id.tv_auto_image_slider);
             textViewOverView = itemView.findViewById(R.id.overview_id_slider);
-            this.itemView = itemView;
+           this.itemView = itemView ;
+
         }
+
+
+
+
     }
 
 }

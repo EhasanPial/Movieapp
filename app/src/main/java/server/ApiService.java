@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import Model.Cast;
@@ -12,6 +14,8 @@ import Model.CastList;
 import Model.Movie;
 import Model.MovieDetails;
 import Model.MovieList;
+import Model.Review;
+import Model.ReviewList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -125,6 +129,9 @@ public class ApiService {
                 Log.d(ApiService.class.getSimpleName(), "onResponse: " + statusCode);
                 if (response.isSuccessful())
                     castMutableLiveData.setValue(response.body().getCasts());
+                if (response.body().getCasts() == null) {
+                    Log.d("Reviews", "null Cast");
+                }
             }
 
             @Override
@@ -138,4 +145,59 @@ public class ApiService {
         return castMutableLiveData;
     }
 
+
+
+    public LiveData<List<Review>> getReviews(String apiKey, int id) {
+            final MutableLiveData<List<Review>> reviews = new MutableLiveData<>();
+            apiInterface.getReviews(id, apiKey).enqueue(new Callback<ReviewList>() {
+            @Override
+            public void onResponse(@NotNull Call<ReviewList> call, @NotNull Response<ReviewList> response) {
+                int statusCode = response.code();
+                Log.d("Reviews", "onResponse: " + statusCode);
+                if (response.isSuccessful())
+                    reviews.setValue(response.body().getResult());
+
+               else if (response.body().getResult() == null) {
+                    Log.d("Reviews", "null service");
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ReviewList> call, Throwable t) {
+                reviews.setValue(null);
+                Log.e("Reviews", "onResponse: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+
+        return reviews;
+    }
+
+
+
+
+
+    /*
+    public LiveData<List<Review>> getReviews(Integer id, String apiKey) {
+        final MutableLiveData<List<Review>> mutableLiveData = new MutableLiveData<>();
+        apiInterface.getReviews(id, apiKey).enqueue(new Callback<ReviewList>() {
+            @Override
+            public void onResponse(Call<ReviewList> call, Response<ReviewList> response) {
+                int statusCode = response.code();
+                mutableLiveData.setValue(response.body().getResult());
+                if (response.body().getResult() == null)
+                {
+                    Log.d("Reviews", "NULL service") ;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewList> call, Throwable t) {
+                mutableLiveData.setValue(null);
+            }
+        });
+        return mutableLiveData;
+    }
+
+ */
 }

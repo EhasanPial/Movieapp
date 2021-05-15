@@ -28,11 +28,12 @@ import server.BaseString;
 
 public class Cast extends Fragment implements CastAdapter.ListClickListener {
 
-    DetailsViewModel detailsViewModel ;
-    private CastAdapter castAdapter ;
-    private RecyclerView recyclerView ;
+    DetailsViewModel detailsViewModel;
+    private CastAdapter castAdapter;
+    private RecyclerView recyclerView;
 
     Integer id;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,22 +48,20 @@ public class Cast extends Fragment implements CastAdapter.ListClickListener {
 
         recyclerView = view.findViewById(R.id.cast_recycler_id);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext()) ;
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
-        castAdapter = new CastAdapter(getActivity().getApplicationContext(), this::onListClick);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        castAdapter = new CastAdapter(getActivity().getApplicationContext(), this);
         recyclerView.setAdapter(castAdapter);
 
 
-        detailsViewModel = new ViewModelProvider(requireActivity()).get(DetailsViewModel.class) ;
+        detailsViewModel = new ViewModelProvider(requireActivity()).get(DetailsViewModel.class);
         detailsViewModel.getId().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                id = integer ;
+                id = integer;
                 detailsViewModel.getCast(BaseString.API, id).observe(getViewLifecycleOwner(), new Observer<List<Model.Cast>>() {
                     @Override
                     public void onChanged(List<Model.Cast> casts) {
-                         castAdapter.setCasts(casts);
+                        castAdapter.setCasts(casts);
                     }
                 });
             }

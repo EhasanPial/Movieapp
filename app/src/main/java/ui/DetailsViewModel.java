@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
 import Model.Cast;
 import Model.Movie;
 import Model.MovieDetails;
+import Model.Review;
 import database.Repository;
 import server.ApiInterface;
 import server.ApiService;
@@ -28,6 +29,7 @@ public class DetailsViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<MovieDetails> movieList;
     private LiveData<List<Cast>> castLiveData;
+    private LiveData<List<Review>> reviewLiveData;
     private MutableLiveData<Movie> movieLiveData;
     private MutableLiveData<MovieDetails> movieDetailsMutableLiveData;
     private MutableLiveData<Integer> movie_id ;
@@ -39,6 +41,7 @@ public class DetailsViewModel extends AndroidViewModel {
         repository = new Repository(application);
         movieLiveData = new MutableLiveData<>();
         movieDetailsMutableLiveData = new MutableLiveData<>();
+        reviewLiveData = new MutableLiveData<>();
         movie_id= new MutableLiveData<>() ;
 
 
@@ -54,6 +57,10 @@ public class DetailsViewModel extends AndroidViewModel {
 
     public LiveData<List<Cast>> getCast(String apikey, int id) {
         return castLiveData = repository.getCast(apikey, id);
+    }
+
+    public LiveData<List<Review>> getReviews(String apikey, int id) {
+        return  reviewLiveData = repository.getRevies(apikey, id);
     }
 
     /* ----- Sharing Data ----- */

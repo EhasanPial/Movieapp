@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -70,6 +71,7 @@ public class PopularMovies extends Fragment implements  PagingAdapterMovies.List
 
     @Override
     public void onListClick(Movie movie) {
-        Toast.makeText(getContext(), movie.getTitle(), Toast.LENGTH_SHORT).show();
+        PopularMoviesDirections.ActionPopularMoviesToDetailsActivity action =    PopularMoviesDirections.actionPopularMoviesToDetailsActivity(movie) ;
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

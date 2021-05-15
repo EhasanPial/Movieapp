@@ -9,7 +9,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +21,13 @@ import android.widget.Toast;
 
 import com.example.movieapp.R;
 
+import java.util.List;
+
 import Model.Movie;
 import Model.MovieDetails;
+import Model.Review;
+import adapter.ReviewAdapter;
+import server.BaseString;
 
 
 public class Info extends Fragment {
@@ -47,6 +55,11 @@ public class Info extends Fragment {
         relesase_date = view.findViewById(R.id.release_date_id);
         budget = view.findViewById(R.id.budget_id);
 
+
+
+
+
+
         detailsViewModel = new ViewModelProvider(requireActivity()).get(DetailsViewModel.class);
 
 
@@ -63,6 +76,8 @@ public class Info extends Fragment {
                     relesase_date.setText(movieDetails.getRelease_date());
                     rev.setText(movieDetails.getRevenue()+"");
                     budget.setText(movieDetails.getBudget()+"");
+
+
                 }
             });
 
