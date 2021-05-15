@@ -2,6 +2,7 @@ package server;
 
 import java.util.List;
 
+import Model.CastList;
 import Model.Movie;
 import Model.MovieDetails;
 import Model.MovieList;
@@ -20,6 +21,9 @@ public interface ApiInterface {
 
     @GET("movie/{movie_id}")
     Call<MovieDetails> getMovieDetails(@Path("movie_id") int id , @Query("api_key") String apiKey) ;
+
+    @GET("movie/{movie_id}/credits")
+    Call<CastList> getCredits(@Path("movie_id") int id , @Query("api_key") String apiKey) ;
 
 
 }

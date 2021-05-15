@@ -132,10 +132,12 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
         mainFragmentViewModel.getTopRatedMovies(apikey, (long) 1).observe(getViewLifecycleOwner(), movies -> {
 
             if (movies.isEmpty())
-                Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
+            {
+
+            }
+
             else {
-                Toast.makeText(getContext(), "Not Empty", Toast.LENGTH_SHORT).show();
-                TopmovieAdapter.setMovieItem(movies);
+                 TopmovieAdapter.setMovieItem(movies);
             }
 
         });
@@ -150,10 +152,12 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
         mainFragmentViewModel.getPopularMovies(apikey, (long) 1).observe(getViewLifecycleOwner(), movies -> {
 
             if (movies.isEmpty())
-                Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
+            {
+
+            }
+
             else {
-                Toast.makeText(getContext(), "Not Empty", Toast.LENGTH_SHORT).show();
-                movieAdapter.setMovieItem(movies);
+                 movieAdapter.setMovieItem(movies);
                 List<Movie> movies1 = new ArrayList<>();
                 for(int i = 0 ; i<6; i++)
                 {

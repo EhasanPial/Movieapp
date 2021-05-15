@@ -5,4 +5,6 @@
     <string name="movieapp">MovieApp</string>
     <string name="enjoy_new_movies">Enjoy New Movies</string>
     <string name="todo">TODO</string>
+    <string name="name">Name</string>
+    <string name="textview">TextView</string>
 </resources>
