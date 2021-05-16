@@ -4,15 +4,20 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "movie")
 public class Movie implements Parcelable {
 
+    @PrimaryKey
     private int id;
     private  String poster_path;
     private  String title;
     private  String overview ;
     private  float popularity ;
     private  float vote_average ;
+
 
 
     public Movie(int id, String poster_path, String title, String overview, float popularity, float vote_average) {

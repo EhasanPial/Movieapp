@@ -42,11 +42,25 @@ public class DetailsViewModel extends AndroidViewModel {
         movieLiveData = new MutableLiveData<>();
         movieDetailsMutableLiveData = new MutableLiveData<>();
         reviewLiveData = new MutableLiveData<>();
+        castLiveData = new MutableLiveData<>() ;
         movie_id= new MutableLiveData<>() ;
 
 
     }
 
+
+    /* --- Favourite --- */
+    public void saveMovie(Movie movie) {
+        repository.insert(movie);
+    }
+
+    public void deleteMovie(Movie movie) {
+        repository.delete(movie);
+    }
+
+    public LiveData<Movie> loadFavById(int id) {
+        return repository.getMovieById(id);
+    }
 
 
     /*---------------- Getting Movie Details -----------------*/

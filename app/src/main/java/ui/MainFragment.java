@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +16,8 @@ import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +28,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.movieapp.R;
+import com.google.android.material.navigation.NavigationView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -46,6 +51,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     private MovieAdapter movieAdapter;
     private MovieAdapter TopmovieAdapter;
     private SliderAdapter sliderAdapter;
+    private View navView;
 
 
 
@@ -65,7 +71,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        navView = view ;
         /* ----- Pop Movies Recycler ----*/
         pop_moives_recycler = view.findViewById(R.id.popular_moives_recycler_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
@@ -83,6 +89,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
         top_moives_recycler.setHasFixedSize(true);
         TopmovieAdapter = new MovieAdapter(getActivity().getApplicationContext(), this::onListClick);
         top_moives_recycler.setAdapter(TopmovieAdapter);
+
 
         /* ----- seall id ----*/
         pop_see_all = view.findViewById(R.id.popSeeAllID) ;
@@ -175,13 +182,15 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     public void onListClick(Movie movie) {
 
         MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
-        Navigation.findNavController(getView()).navigate(action);
+        NavController navController = Navigation.findNavController(navView);
+        navController.navigate(action);
     }
 
 
     @Override
     public void onSliderListClick(Movie movie) {
         MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
-        Navigation.findNavController(getView()).navigate(action);
+        NavController navController = Navigation.findNavController(navView);
+        navController.navigate(action);
     }
 }
