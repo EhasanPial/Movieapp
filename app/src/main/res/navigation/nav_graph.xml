@@ -45,6 +45,9 @@
             app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_mainFragment_to_posts"
+            app:destination="@id/posts" />
     </fragment>
     <fragment
         android:id="@+id/popularMovies"
@@ -107,5 +110,25 @@
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/posts"
+        android:name="Firebase.Posts"
+        android:label="fragment_posts"
+        tools:layout="@layout/fragment_posts" >
+        <action
+            android:id="@+id/action_posts_to_forum2"
+            app:destination="@id/forum2" />
+    </fragment>
+    <fragment
+        android:id="@+id/forum2"
+        android:name="Firebase.Forum"
+        android:label="fragment_forum"
+        tools:layout="@layout/fragment_forum" >
+        <action
+            android:id="@+id/action_forum2_to_posts"
+            app:destination="@id/posts"
+            app:popUpTo="@id/posts"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
