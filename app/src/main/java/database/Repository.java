@@ -80,4 +80,7 @@ public class Repository {
         return apiService.getReviews(apiKey, id);
     }
 
+    public LiveData<List<Movie>> getSearchedMovies(String apiKey, String query) {
+        return  apiService.getSearchedMovies(apiKey, query) ;
+    }
 }

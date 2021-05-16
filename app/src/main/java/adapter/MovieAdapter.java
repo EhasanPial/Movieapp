@@ -25,10 +25,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     final private ListClickListener mListClickListener;
     private Context context;
     private MovieViewHolder holder;
+    private boolean TYPE = true;
 
-    public MovieAdapter(Context context, ListClickListener onListClickListener) {
+    public MovieAdapter(Context context, ListClickListener onListClickListener, boolean type) {
         this.context = context;
         this.mListClickListener = onListClickListener;
+        this.TYPE = type;
     }
 
     @NonNull
@@ -57,7 +59,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         String posterUrl = BaseString.POSTER_PATH;
         Picasso.get()
                 .load(posterUrl + imageUrl)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.drop_shadow)
                 .into(holder.movieImageView);
     }
 
@@ -66,7 +68,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         if (mMovies == null) {
             return 0;
         }
-        return 12;
+        if (TYPE) return 12;
+        return mMovies.size();
     }
 
     public void setMovieItem(List<Movie> movie) {
@@ -82,10 +85,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView movieImageView = itemView.findViewById(R.id.movie_imageView) ;
+        ImageView movieImageView = itemView.findViewById(R.id.movie_imageView);
 
 
-        TextView movieTitle = itemView.findViewById(R.id.movie_title) ;
+        TextView movieTitle = itemView.findViewById(R.id.movie_title);
 
         MovieViewHolder(View itemView) {
             super(itemView);

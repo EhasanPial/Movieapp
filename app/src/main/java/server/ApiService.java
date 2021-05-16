@@ -21,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ui.Search;
 
 public class ApiService {
 
@@ -174,30 +175,31 @@ public class ApiService {
     }
 
 
-
-
-
-    /*
-    public LiveData<List<Review>> getReviews(Integer id, String apiKey) {
-        final MutableLiveData<List<Review>> mutableLiveData = new MutableLiveData<>();
-        apiInterface.getReviews(id, apiKey).enqueue(new Callback<ReviewList>() {
+  public LiveData<List<Movie>> getSearchedMovies(String apiKey, String query) {
+            final MutableLiveData<List<Movie>> reviews = new MutableLiveData<>();
+            apiInterface.getSearchedMovies(query, apiKey).enqueue(new Callback<MovieList>() {
             @Override
-            public void onResponse(Call<ReviewList> call, Response<ReviewList> response) {
+            public void onResponse(@NotNull Call<MovieList> call, @NotNull Response<MovieList> response) {
                 int statusCode = response.code();
-                mutableLiveData.setValue(response.body().getResult());
-                if (response.body().getResult() == null)
-                {
-                    Log.d("Reviews", "NULL service") ;
-                }
+                Log.d("Search", "onResponse: " + statusCode);
+                if (response.isSuccessful() )
+                    reviews.setValue(response.body().getMovieResults());
             }
 
             @Override
-            public void onFailure(Call<ReviewList> call, Throwable t) {
-                mutableLiveData.setValue(null);
+            public void onFailure(@NotNull Call<MovieList> call, Throwable t) {
+                reviews.setValue(null);
+                Log.e("Search", "onResponse: " + t.getMessage());
+                t.printStackTrace();
             }
         });
-        return mutableLiveData;
+
+        return reviews;
     }
 
- */
+
+
+
+
+
 }

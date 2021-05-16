@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_movie"
@@ -14,34 +15,26 @@
         android:elevation="5dp"
         app:cardCornerRadius="5dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/movie_imageView"
-                android:layout_width="150dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/todo"
-                android:scaleType="centerCrop" />
-
-
-            <TextView
-                android:id="@+id/movie_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif"
-                android:maxLines="1"
-                android:padding="5dp"
-
-                android:textAlignment="center"
-                tools:text="@string/app_name" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/movie_imageView"
+            android:layout_width="150dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop" />
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/movie_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
+        android:padding="5dp"
+
+        android:textAlignment="center"
+        tools:text="@string/app_name" />
+
 </LinearLayout>

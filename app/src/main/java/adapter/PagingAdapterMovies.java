@@ -53,7 +53,7 @@ public class PagingAdapterMovies extends PagedListAdapter<Movie, PagingAdapterMo
         String posterUrl = BaseString.POSTER_PATH;
         Picasso.get()
                 .load(posterUrl + imageUrl)
-                .error(R.mipmap.ic_launcher)
+                .error(R.drawable.drop_shadow)
                 .into(holder.movieImageView);
     }
 

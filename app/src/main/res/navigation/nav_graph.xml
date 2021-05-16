@@ -9,42 +9,103 @@
         android:id="@+id/mainFragment"
         android:name="ui.MainFragment"
         android:label="MovieApp"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_popularMovies"
-            app:destination="@id/popularMovies" />
+            app:destination="@id/popularMovies"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_mainFragment_to_topRatedMovies"
-            app:destination="@id/topRatedMovies" />
+            app:destination="@id/topRatedMovies"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_mainFragment_to_detailsActivity"
-            app:destination="@id/detailsActivity" />
+            app:destination="@id/detailsActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_mainFragment_to_search"
+            app:destination="@id/searchMenu"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_mainFragment_to_favourites"
+            app:destination="@id/favourites"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/popularMovies"
         android:name="ui.PopularMovies"
         android:label="Popular Movies"
-        tools:layout="@layout/fragment_popular_movies" >
+        tools:layout="@layout/fragment_popular_movies">
         <action
             android:id="@+id/action_popularMovies_to_detailsActivity"
-            app:destination="@id/detailsActivity" />
+            app:destination="@id/detailsActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/topRatedMovies"
         android:name="ui.TopRatedMovies"
         android:label="Top Rated Movies"
-        tools:layout="@layout/fragment_top_rated_movies" >
+        tools:layout="@layout/fragment_top_rated_movies">
         <action
             android:id="@+id/action_topRatedMovies_to_detailsActivity"
-            app:destination="@id/detailsActivity" />
+            app:destination="@id/detailsActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/detailsActivity"
         android:name="ui.DetailsActivity"
         android:label="fragment_details_activity"
-        tools:layout="@layout/fragment_details_activity" >
+        tools:layout="@layout/fragment_details_activity">
         <argument
             android:name="moviepass"
             app:argType="Model.Movie" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchMenu"
+        android:name="ui.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchMenu_to_detailsActivity"
+            app:destination="@id/detailsActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/favourites"
+        android:name="ui.Favourites"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites">
+        <action
+            android:id="@+id/action_favourites_to_detailsActivity"
+            app:destination="@id/detailsActivity"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+
     </fragment>
 </navigation>

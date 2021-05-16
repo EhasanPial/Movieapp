@@ -54,12 +54,11 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     private View navView;
 
 
-
     /*------ UI ---- */
     RecyclerView pop_moives_recycler;
-    private Button pop_see_all ;
+    private Button pop_see_all;
     RecyclerView top_moives_recycler;
-    private Button top_see_all ;
+    private Button top_see_all;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,35 +70,35 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navView = view ;
+        navView = view;
         /* ----- Pop Movies Recycler ----*/
         pop_moives_recycler = view.findViewById(R.id.popular_moives_recycler_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         pop_moives_recycler.setLayoutManager(gridLayoutManager);
         pop_moives_recycler.setHasFixedSize(true);
-        movieAdapter = new MovieAdapter(getActivity().getApplicationContext(), this::onListClick);
+        movieAdapter = new MovieAdapter(getActivity().getApplicationContext(), this::onListClick,true);
         pop_moives_recycler.setAdapter(movieAdapter);
 
-        pop_see_all = view.findViewById(R.id.popSeeAllID) ;
+        pop_see_all = view.findViewById(R.id.popSeeAllID);
 
         /* ----- Pop Movies Recycler ----*/
         top_moives_recycler = view.findViewById(R.id.top_recycler_id);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 3);
         top_moives_recycler.setLayoutManager(gridLayoutManager2);
         top_moives_recycler.setHasFixedSize(true);
-        TopmovieAdapter = new MovieAdapter(getActivity().getApplicationContext(), this::onListClick);
+        TopmovieAdapter = new MovieAdapter(getActivity().getApplicationContext(), this::onListClick,true);
         top_moives_recycler.setAdapter(TopmovieAdapter);
 
 
         /* ----- seall id ----*/
-        pop_see_all = view.findViewById(R.id.popSeeAllID) ;
-        top_see_all = view.findViewById(R.id.topSeeAllID) ;
+        pop_see_all = view.findViewById(R.id.popSeeAllID);
+        top_see_all = view.findViewById(R.id.topSeeAllID);
 
         /* ----- Slider ----*/
 
         SliderView sliderView = view.findViewById(R.id.imageSlider);
 
-        sliderAdapter = new SliderAdapter(getContext() ,this::onListClick);
+        sliderAdapter = new SliderAdapter(getContext(), this::onListClick);
 
         sliderView.setSliderAdapter(sliderAdapter);
 
@@ -119,7 +118,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
         pop_see_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v) ;
+                NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_mainFragment_to_popularMovies);
             }
         });
@@ -127,7 +126,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
         top_see_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(v) ;
+                NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_mainFragment_to_topRatedMovies);
             }
         });
@@ -138,13 +137,11 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
 
         mainFragmentViewModel.getTopRatedMovies(apikey, (long) 1).observe(getViewLifecycleOwner(), movies -> {
 
-            if (movies.isEmpty())
-            {
+            if (movies.isEmpty()) {
 
-            }
+            } else {
+                TopmovieAdapter.setMovieItem(movies);
 
-            else {
-                 TopmovieAdapter.setMovieItem(movies);
             }
 
         });
@@ -152,25 +149,23 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     }
 
 
-    public void loadPopularMovies() {
+    private void loadPopularMovies() {
 
         mainFragmentViewModel = ViewModelProviders.of(this).get(MainFragmentViewModel.class);
 
         mainFragmentViewModel.getPopularMovies(apikey, (long) 1).observe(getViewLifecycleOwner(), movies -> {
 
-            if (movies.isEmpty())
-            {
+            if (movies.isEmpty()) {
 
-            }
+            } else {
+                movieAdapter.setMovieItem(movies);
 
-            else {
-                 movieAdapter.setMovieItem(movies);
                 List<Movie> movies1 = new ArrayList<>();
-                for(int i = 0 ; i<6; i++)
-                {
-                    movies1.add(movies.get(i)) ;
+                for (int i = 0; i < 6; i++) {
+                    movies1.add(movies.get(i));
                 }
                 sliderAdapter.setMovies(movies1);
+
             }
 
         });
@@ -181,7 +176,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
     @Override
     public void onListClick(Movie movie) {
 
-        MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
+        MainFragmentDirections.ActionMainFragmentToDetailsActivity action = MainFragmentDirections.actionMainFragmentToDetailsActivity(movie);
         NavController navController = Navigation.findNavController(navView);
         navController.navigate(action);
     }
@@ -189,7 +184,7 @@ public class MainFragment extends Fragment implements MovieAdapter.ListClickList
 
     @Override
     public void onSliderListClick(Movie movie) {
-        MainFragmentDirections.ActionMainFragmentToDetailsActivity action =    MainFragmentDirections.actionMainFragmentToDetailsActivity(movie) ;
+        MainFragmentDirections.ActionMainFragmentToDetailsActivity action = MainFragmentDirections.actionMainFragmentToDetailsActivity(movie);
         NavController navController = Navigation.findNavController(navView);
         navController.navigate(action);
     }

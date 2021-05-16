@@ -71,7 +71,7 @@ public class PopularMovies extends Fragment implements  PagingAdapterMovies.List
 
     @Override
     public void onListClick(Movie movie) {
-        PopularMoviesDirections.ActionPopularMoviesToDetailsActivity action =    PopularMoviesDirections.actionPopularMoviesToDetailsActivity(movie) ;
+        PopularMoviesDirections.ActionPopularMoviesToDetailsActivity action =  PopularMoviesDirections.actionPopularMoviesToDetailsActivity(movie) ;
         Navigation.findNavController(getView()).navigate(action);
     }
 }
