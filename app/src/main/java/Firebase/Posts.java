@@ -32,8 +32,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Cast;
 
-public class Posts extends Fragment {
+
+public class Posts extends Fragment  implements PostAdapter.ListClickListener{
 
 
     private FirebaseAuth mAuth;
@@ -80,7 +82,7 @@ public class Posts extends Fragment {
 
         recyclerView = view.findViewById(R.id.post_recy_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        postAdapter = new PostAdapter(getContext());
+        postAdapter = new PostAdapter(getContext() , this);
 
 
 
@@ -88,6 +90,7 @@ public class Posts extends Fragment {
     }
 
     public void readData() {
+
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -110,5 +113,12 @@ public class Posts extends Fragment {
 
 
 
+    }
+
+    @Override
+    public void onListClick(Post cast) {
+        long id   =  cast.getId() ;
+        List<Comments> commentsList = cast.getCommentsList() ;
+        ///////////////////////////// TOOOOOOOOOOOOOOOOOOO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO //////////////////////////////////////
     }
 }

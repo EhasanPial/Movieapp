@@ -37,11 +37,11 @@ public class ForumViewModel extends AndroidViewModel {
 
     }
 
-    public boolean writeData(String username, String msg, String img)
+    public boolean writeData(long id, String des, String username, String img, int upVotes, int downVotes, float rating, String movieTitle, List<Comments> commentsList)
     {
 
-        Post post = new Post(msg,username,img,0,0) ;
-        databaseReference.child(UUID.randomUUID().toString()).setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
+        Post post = new Post(id,des,username,img,upVotes,downVotes,rating,movieTitle, null) ;
+        databaseReference.child(id+"").setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 flag = true ;
