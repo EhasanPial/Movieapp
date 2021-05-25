@@ -16,9 +16,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.movieapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,13 +39,13 @@ import java.util.List;
 import Model.Cast;
 
 
-public class Posts extends Fragment  implements PostAdapter.ListClickListener{
+public class Posts extends Fragment implements PostAdapter.ListClickListener {
 
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FloatingActionButton post;
-
+    private boolean upVoteToke = false, downVoteToken = false;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private List<Post> postList;
@@ -62,13 +66,24 @@ public class Posts extends Fragment  implements PostAdapter.ListClickListener{
         super.onViewCreated(view, savedInstanceState);
 
         post = view.findViewById(R.id.new_post_id);
-        postList = new ArrayList<>() ;
+        postList = new ArrayList<>();
 
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        NavController nav = Navigation.findNavController(view) ;
+        if (mAuth.getCurrentUser() == null)
+        {
+            nav.navigate(R.id.action_posts_to_login);
+            return;
+        }
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("AllPosts");
         postList = new ArrayList<>();
+
+
+        NavigationView navView = getActivity().findViewById(R.id.nav_view);
+        TextView userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
+        userName.setText(mAuth.getCurrentUser().getEmail());
 
 
         readData();
@@ -82,8 +97,7 @@ public class Posts extends Fragment  implements PostAdapter.ListClickListener{
 
         recyclerView = view.findViewById(R.id.post_recy_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        postAdapter = new PostAdapter(getContext() , this);
-
+        postAdapter = new PostAdapter(getContext(), this);
 
 
         recyclerView.setAdapter(postAdapter);
@@ -111,14 +125,81 @@ public class Posts extends Fragment  implements PostAdapter.ListClickListener{
         databaseReference.addValueEventListener(valueEventListener);
 
 
-
-
     }
 
     @Override
-    public void onListClick(Post cast) {
-        long id   =  cast.getId() ;
-        List<Comments> commentsList = cast.getCommentsList() ;
-        ///////////////////////////// TOOOOOOOOOOOOOOOOOOO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO //////////////////////////////////////
+    public void onListClick(Post cast, int typeClick) {
+        long id = cast.getId();
+        if (typeClick == 1 && upVoteToke == false) {
+            int voted = cast.getUpVotes();
+            databaseReference.child(id + "").child("upVotes").setValue(voted + 1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    postList.clear();
+                    readData();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+
+            if (downVoteToken) {
+                int votedwn = cast.getDownVotes();
+                if(votedwn == 0) votedwn = 1 ;
+                databaseReference.child(id + "").child("downVotes").setValue(votedwn - 1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        postList.clear();
+                        readData();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+            }
+            upVoteToke = true;
+            downVoteToken = false;
+
+        }
+        else if (typeClick == 2 && !downVoteToken) {
+            int voted = cast.getDownVotes();
+            databaseReference.child(id + "").child("downVotes").setValue(voted + 1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    postList.clear();
+                    readData();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+
+            if (upVoteToke) {
+                int votedUp = cast.getUpVotes();
+                if(votedUp == 0) votedUp = 1 ;
+                databaseReference.child(id + "").child("upVotes").setValue(votedUp - 1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        postList.clear();
+                        readData();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+            }
+            downVoteToken = true;
+            upVoteToke = false;
+        }
     }
 }

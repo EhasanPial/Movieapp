@@ -7,10 +7,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
 
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="8dp"
+
              android:id="@+id/post_recy_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

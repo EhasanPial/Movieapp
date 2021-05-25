@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +42,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Text;
 
 import java.net.URI;
 import java.sql.Time;
@@ -57,6 +61,7 @@ public class Forum extends Fragment {
     private ForumViewModel forumViewModel;
     private Uri filePath = null;
     private long postTime;
+    private ProgressBar progressBar ;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -80,11 +85,13 @@ public class Forum extends Fragment {
         rating = view.findViewById(R.id.post_rating_id);
         selectPhoto = view.findViewById(R.id.post_photo_id);
         post = view.findViewById(R.id.post_button_id);
+        progressBar = view.findViewById(R.id.post_progressBar);
 
 
         // FirebaseUser currentUser = mAuth.getCurrentUser();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         forumViewModel = new ViewModelProvider(requireActivity()).get(ForumViewModel.class);
 
@@ -102,6 +109,9 @@ public class Forum extends Fragment {
             @Override
             public void onClick(View v) {
 
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setIndeterminate(true);
+                post.setEnabled(false);
                 if (filePath != null) {
                     postTime = System.currentTimeMillis();
                     StorageReference ref = FirebaseStorage.getInstance().getReference().child("images/" + postTime);
@@ -112,12 +122,14 @@ public class Forum extends Fragment {
                                     setPost("images/" + postTime,v) ;
 
 
+
+
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-
+                                    post.setEnabled(true);
                                 }
                             })
                             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -129,8 +141,19 @@ public class Forum extends Fragment {
 
 
                 }
+
+                else
+                {
+                    Snackbar.make(getView(), "Select a movie photo", BaseTransientBottomBar.LENGTH_SHORT).setTextColor(Color.parseColor("#FF0000"))
+                            .setBackgroundTint(Color.parseColor("#FFFFFF")).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    post.setEnabled(true);
+
+                }
             }
         });
+
+        progressBar.setVisibility(View.INVISIBLE);
 
 
     }
@@ -155,7 +178,7 @@ public class Forum extends Fragment {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
 
-                    boolean success = forumViewModel.writeData(postTime, editText.getText().toString(), "Pial", downloadUri.toString() , 0, 0, Long.parseLong(rating.getText().toString()), title.getText().toString(), null);
+                    boolean success = forumViewModel.writeData(postTime, editText.getText().toString(), "Pial", downloadUri.toString() , 0, 0, Float.parseFloat(rating.getText().toString()), title.getText().toString(), null);
                     if (success) {
                         Snackbar.make(getView(), "Posted", BaseTransientBottomBar.LENGTH_SHORT).show();
                         NavController navController = Navigation.findNavController(v);
@@ -167,8 +190,8 @@ public class Forum extends Fragment {
                         Snackbar.make(getView(), "Something went wrong!", BaseTransientBottomBar.LENGTH_SHORT).setTextColor(Color.parseColor("#FF0000")).show();
 
                 } else {
-                    // Handle failures
-                    // ...
+                    post.setEnabled(true);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });

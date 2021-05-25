@@ -58,6 +58,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         holder.movieTilte.setText(cast.getMovieTitle());
         holder.rating.setText("Rating: "+cast.getRating()+"");
         holder.dex.setText("Description: \n\n"+cast.getDes());
+        holder.uptext.setText(cast.getUpVotes()+"");
+        holder.downtext.setText(cast.getDownVotes()+"");
 
         Picasso.get()
                 .load(cast.getImg())
@@ -76,18 +78,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
 
     public interface ListClickListener {
-        void onListClick(Post cast);
+        void onListClick(Post cast, int typeClick);
+
+
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
 
         TextView dex, uptext, downtext;
         MaterialButton upvote, downvote, commentes;
         TextView movieTilte, rating;
         ImageView imgUrl;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView)  {
             super(itemView);
 
             dex = itemView.findViewById(R.id.forum_dex_id);
@@ -100,9 +104,29 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             movieTilte = itemView.findViewById(R.id.formu_title_id);
             rating = itemView.findViewById(R.id.forum_rating_id);
 
+            upvote.setOnClickListener(this);
+            downvote.setOnClickListener(this);
+
 
         }
 
 
+        @Override
+        public void onClick(View v) {
+            int pos = getAdapterPosition() ;
+            if( v.getId() == R.id.button_up_vote)
+            {
+
+                mlistClickListener.onListClick(casts.get(pos), 1);
+                notifyItemChanged(getAdapterPosition());
+            }
+
+            else if(v.getId() == R.id.button_dwn_vote)
+            {
+                mlistClickListener.onListClick(casts.get(pos), 2);
+                notifyItemChanged(getAdapterPosition());
+
+            }
+        }
     }
 }

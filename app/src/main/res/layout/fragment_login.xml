@@ -16,7 +16,7 @@
 
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -27,20 +27,9 @@
             android:inputType="textEmailAddress"
             android:padding="8dp" />
 
-        <EditText
-            android:id="@+id/editTextUserName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="User Name"
-            android:inputType="textEmailAddress"
-            android:padding="8dp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/login_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -49,20 +38,47 @@
             android:autofillHints=""
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
             app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
         <Button
-            android:id="@+id/reg_sign_up_id"
+            android:id="@+id/login_button"
             style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:text="Sign Up" />
+            android:text="Sign In" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:layout_margin="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No account?"
+            android:textStyle="bold"
+            />
+
+            <Button
+                android:id="@+id/login_signUp_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="Sign Up"
+                android:textColor="@color/teal_700"/>
+
+
+        </LinearLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>

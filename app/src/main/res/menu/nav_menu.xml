@@ -1,28 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mainFragment"
+            android:icon="@drawable/ic_outline_play_circle_outline_24"
+            android:title="Home" />
         <item
             android:id="@+id/popularMovies"
-            android:title="Popular Movies"
-            android:icon="@drawable/ic_outline_play_circle_outline_24"/>
+            android:icon="@drawable/ic_outline_play_circle_outline_24"
+            android:title="Popular Movies" />
         <item
             android:id="@+id/topRatedMovies"
-            android:title="Top Rated Movies"
-            android:icon="@drawable/ic_baseline_star_outline_24"/>
+            android:icon="@drawable/ic_baseline_star_outline_24"
+            android:title="Top Rated Movies" />
         <item
             android:id="@+id/searchMenu"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Search"/>
+            android:title="Search" />
         <item
             android:id="@+id/favourites"
             android:icon="@drawable/ic_baseline_favorite_border_24"
-            android:title="Favorites"/>
-     <item
-            android:id="@+id/posts"
-            android:icon="@drawable/ic_baseline_favorite_border_24"
-            android:title="Forum"/>
+            android:title="Favorites" />
+
+    </group>
+
+    <group android:checkableBehavior="all">
+
+        <item android:title="Discussion">
+            <menu>
+
+                <item
+                    android:id="@+id/login"
+                    android:icon="@drawable/ic_baseline_favorite_border_24"
+                    android:title="Login/SignUp" />
+
+
+                <item
+                    android:id="@+id/posts"
+                    android:icon="@drawable/ic_baseline_favorite_border_24"
+                    android:title="Forum" />
+
+                <item
+                    android:id="@+id/action_mainFragment_to_signOut2"
+                    android:icon="@drawable/ic_baseline_favorite_border_24"
+                    android:title="Sign Out" />
+
+
+            </menu>
+
+        </item>
+    </group>
 
 
 </menu>

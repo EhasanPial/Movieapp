@@ -46,8 +46,13 @@
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
         <action
-            android:id="@+id/action_mainFragment_to_posts"
-            app:destination="@id/posts" />
+            android:id="@+id/action_mainFragment_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_mainFragment_to_signOut2"
+            app:destination="@id/signOut2"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/popularMovies"
@@ -114,21 +119,61 @@
     <fragment
         android:id="@+id/posts"
         android:name="Firebase.Posts"
-        android:label="fragment_posts"
-        tools:layout="@layout/fragment_posts" >
+        android:label="Forum"
+        tools:layout="@layout/fragment_posts">
         <action
             android:id="@+id/action_posts_to_forum2"
             app:destination="@id/forum2" />
+        <action
+            android:id="@+id/action_posts_to_login"
+            app:destination="@id/login"
+            app:popUpTo="@id/posts"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/forum2"
         android:name="Firebase.Forum"
-        android:label="fragment_forum"
-        tools:layout="@layout/fragment_forum" >
+        android:label="Post"
+        tools:layout="@layout/fragment_forum">
         <action
             android:id="@+id/action_forum2_to_posts"
             app:destination="@id/posts"
             app:popUpTo="@id/posts"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration"
+        android:name="Firebase.Registration"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registration_to_posts"
+            app:destination="@id/posts"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="Firebase.Login"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_login_to_posts"
+            app:destination="@id/posts"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_login_to_registration"
+            app:destination="@id/registration" />
+    </fragment>
+    <fragment
+        android:id="@+id/signOut2"
+        android:name="Firebase.SignOut"
+        android:label="fragment_sign_out"
+        tools:layout="@layout/fragment_sign_out" >
+        <action
+            android:id="@+id/action_signOut2_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/signOut2"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
