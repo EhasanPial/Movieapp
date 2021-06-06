@@ -23,35 +23,32 @@ import java.util.UUID;
 
 public class ForumViewModel extends AndroidViewModel {
 
-    FirebaseDatabase firebaseDatabase ;
-    DatabaseReference databaseReference ;
-    private boolean flag = false ;
-    private List<Post> postList ;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    private boolean flag = false;
+    private List<Post> postList;
 
     public ForumViewModel(@NonNull Application application) {
         super(application);
 
-        firebaseDatabase = FirebaseDatabase.getInstance() ;
-        databaseReference = firebaseDatabase.getReference().child("AllPosts") ;
-        postList = new ArrayList<>() ;
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("AllPosts");
+        postList = new ArrayList<>();
 
     }
 
-    public boolean writeData(long id, String des, String username, String img, int upVotes, int downVotes, float rating, String movieTitle, List<Comments> commentsList)
-    {
+    public boolean writeData(long id, String des, String username, String img, float rating, String movieTitle, List<Comments> commentsList) {
 
-        Post post = new Post(id,des,username,img,upVotes,downVotes,rating,movieTitle, null) ;
-        databaseReference.child(id+"").setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
+        Post post = new Post(id, des, username, img, rating, movieTitle, null);
+        databaseReference.child(id + "").setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                flag = true ;
+                flag = true;
             }
-        }) ;
+        });
 
-        return true ;
+        return true;
     }
-
-
 
 
 }

@@ -3,26 +3,23 @@ package Firebase;
 import java.util.List;
 
 public class Post {
-    private long id ;
+    private long id;
     private String des;
     private String username;
-    private String img ;
-    private int upVotes;
-    private int downVotes;
-    private float rating ;
-    private String movieTitle ;
-    private List<Comments> commentsList ;
+    private String img;
+    private float rating;
+    private String movieTitle;
+    private List<Comments> commentsList;
+
     public Post() {
     }
 
 
-    public Post(long id, String des, String username, String img, int upVotes, int downVotes, float rating, String movieTitle, List<Comments> commentsList) {
+    public Post(long id, String des, String username, String img, float rating, String movieTitle, List<Comments> commentsList) {
         this.id = id;
         this.des = des;
         this.username = username;
         this.img = img;
-        this.upVotes = upVotes;
-        this.downVotes = downVotes;
         this.rating = rating;
         this.movieTitle = movieTitle;
         this.commentsList = commentsList;
@@ -60,21 +57,6 @@ public class Post {
         this.img = img;
     }
 
-    public int getUpVotes() {
-        return upVotes;
-    }
-
-    public void setUpVotes(int upVotes) {
-        this.upVotes = upVotes;
-    }
-
-    public int getDownVotes() {
-        return downVotes;
-    }
-
-    public void setDownVotes(int downVotes) {
-        this.downVotes = downVotes;
-    }
 
     public float getRating() {
         return rating;
@@ -99,4 +81,6 @@ public class Post {
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
     }
+
+
 }

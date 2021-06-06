@@ -26,6 +26,6 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
         android:id="@+id/new_post_id"
-        android:src="@drawable/ic_baseline_add_24" />
+        android:src="@drawable/ic_baseline_add_24"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
