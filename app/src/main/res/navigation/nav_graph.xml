@@ -129,6 +129,9 @@
             app:destination="@id/login"
             app:popUpTo="@id/posts"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_posts_to_comment"
+            app:destination="@id/comment" />
     </fragment>
     <fragment
         android:id="@+id/forum2"
@@ -175,5 +178,14 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/signOut2"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/comment"
+        android:name="Firebase.Comment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" >
+        <argument
+            android:name="postID"
+            app:argType="string" />
     </fragment>
 </navigation>

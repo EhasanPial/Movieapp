@@ -57,10 +57,9 @@ public class Posts extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private DatabaseReference likeRef, dislikeRef;
-    private BottomSheetBehavior bottomSheetBehavior ;
-    private PostAdapter postAdapter;
+
     private FirebaseRecyclerAdapter<Post, PostAdapter> firebaseRecyclerAdapter;
-   private ConstraintLayout bottomSheet;
+
 
     private RecyclerView recyclerView;
 
@@ -76,12 +75,12 @@ public class Posts extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         post = view.findViewById(R.id.new_post_id);
-        bottomSheet = view.findViewById(R.id.bottomSheet);
+
 
         recyclerView = view.findViewById(R.id.post_recy_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)  ;
+
 
         mAuth = FirebaseAuth.getInstance();
         NavController nav = Navigation.findNavController(view);
@@ -105,7 +104,7 @@ public class Posts extends Fragment {
         TextView userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
         userName.setText(mAuth.getCurrentUser().getEmail());
 
-        postAdapter = new PostAdapter(view);
+
         likeRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         dislikeRef = FirebaseDatabase.getInstance().getReference().child("DisLikes");
 
@@ -268,7 +267,9 @@ public class Posts extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                      PostsDirections.ActionPostsToComment actionPostsToComment =  PostsDirections.actionPostsToComment(postkey) ;
+                        NavController navController = Navigation.findNavController(view);
+                        navController.navigate(actionPostsToComment);
                     }
                 });
 
