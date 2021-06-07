@@ -58,18 +58,21 @@ public class PostAdapter extends RecyclerView.ViewHolder {
         likeRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         dislikeRef = FirebaseDatabase.getInstance().getReference().child("DisLikes");
 
+
+
     }
 
 
-    FirebaseRecyclerOptions<Post> options =
+
+
+   /* FirebaseRecyclerOptions<Post> options =
             new FirebaseRecyclerOptions.Builder<Post>()
                     .setQuery(FirebaseDatabase.getInstance().getReference().child("AllPosts"), Post.class)
                     .build();
 
 
     FirebaseRecyclerAdapter<Post, PostAdapter> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostAdapter>(options) {
-        boolean testClick = false;
-        boolean testClick2 = false;
+
 
         @Override
         protected void onBindViewHolder(@NonNull PostAdapter holder, int position, @NonNull Post post) {
@@ -123,35 +126,35 @@ public class PostAdapter extends RecyclerView.ViewHolder {
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           // if (testClick) {
-                                if (!snapshot.child(postkey).hasChild(userid)) {
-                                    likeRef.child(postkey).child(userid).setValue(true);
-                                    holder.uptext.setText(snapshot.child(postkey).getChildrenCount() + "");
-                                    dislikeRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if (snapshot.child(postkey).hasChild(userid)) {
-                                                dislikeRef.child(postkey).child(userid).removeValue();
-                                                int downVoteCount = (int) snapshot.child(postkey).getChildrenCount();
-                                                holder.downtext.setText(downVoteCount + "");
-
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                            // if (testClick) {
+                            if (!snapshot.child(postkey).hasChild(userid)) {
+                                likeRef.child(postkey).child(userid).setValue(true);
+                                holder.uptext.setText(snapshot.child(postkey).getChildrenCount() + "");
+                                dislikeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.child(postkey).hasChild(userid)) {
+                                            dislikeRef.child(postkey).child(userid).removeValue();
+                                            int downVoteCount = (int) snapshot.child(postkey).getChildrenCount();
+                                            holder.downtext.setText(downVoteCount + "");
 
                                         }
-                                    });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
 
 
-                                } else {
-                                    Snackbar.make(itemView, "Already Voted", Snackbar.LENGTH_SHORT).show();
-                                }
-
-
+                            } else {
+                                Snackbar.make(itemView, "Already Voted", Snackbar.LENGTH_SHORT).show();
                             }
-                       // }
+
+
+                        }
+                        // }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -159,7 +162,7 @@ public class PostAdapter extends RecyclerView.ViewHolder {
                         }
                     });
 
-                   // testClick = false;
+                    // testClick = false;
                 }
             });
 
@@ -167,42 +170,41 @@ public class PostAdapter extends RecyclerView.ViewHolder {
             holder.downvote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // testClick2 = true;
+                    // testClick2 = true;
 
                     dislikeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                         //   if (testClick2) {
-                                if (!snapshot.child(postkey).hasChild(userid)) {
-                                    dislikeRef.child(postkey).child(userid).setValue(true);
-                                    holder.downtext.setText(snapshot.child(postkey).getChildrenCount() + "");
-                                    likeRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if (snapshot.child(postkey).hasChild(userid)) {
-                                                likeRef.child(postkey).child(userid).removeValue();
-                                                int downVoteCount = (int) snapshot.child(postkey).getChildrenCount();
-                                                holder.uptext.setText(downVoteCount + "");
-                                            }
+                            //   if (testClick2) {
+                            if (!snapshot.child(postkey).hasChild(userid)) {
+                                dislikeRef.child(postkey).child(userid).setValue(true);
+                                holder.downtext.setText(snapshot.child(postkey).getChildrenCount() + "");
+                                likeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.child(postkey).hasChild(userid)) {
+                                            likeRef.child(postkey).child(userid).removeValue();
+                                            int downVoteCount = (int) snapshot.child(postkey).getChildrenCount();
+                                            holder.uptext.setText(downVoteCount + "");
                                         }
+                                    }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                        }
-                                    });
+                                    }
+                                });
 
 
-                                }
-                                else {
-                                    Snackbar.make(itemView, "Already Unvoted", Snackbar.LENGTH_SHORT).show();
-                                }
-
+                            } else {
+                                Snackbar.make(itemView, "Already Unvoted", Snackbar.LENGTH_SHORT).show();
                             }
 
-                     //   }
+                        }
+
+                        //   }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -210,12 +212,19 @@ public class PostAdapter extends RecyclerView.ViewHolder {
                         }
                     });
 
-                   // testClick2 = false;
+                    // testClick2 = false;
 
 
                 }
 
 
+            });
+
+            holder.commentes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
             });
 
 
@@ -233,6 +242,8 @@ public class PostAdapter extends RecyclerView.ViewHolder {
     public FirebaseRecyclerAdapter<Post, PostAdapter> getFirebaseRecyclerAdapter() {
         return firebaseRecyclerAdapter;
     }
+
+   */
 
 
 }
