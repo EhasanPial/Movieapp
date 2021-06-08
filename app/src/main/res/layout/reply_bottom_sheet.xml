@@ -17,8 +17,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Comment"
-        android:padding="8dp"
-        android:layout_marginLeft="8dp"
+        android:padding="12dp"
+
+        android:background="@color/fui_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/reply_button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,10 +40,11 @@
         android:id="@+id/reply_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reply"
+        android:layout_marginEnd="8dp"
         android:padding="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Reply"
+        app:layout_constraintBottom_toBottomOf="@+id/reply_msg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reply_msg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
