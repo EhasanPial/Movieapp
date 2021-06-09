@@ -28,7 +28,10 @@ public class PagingAdapterMovies extends PagedListAdapter<Movie, PagingAdapterMo
         super(Movie.CALLBACK);
         this.context = context;
         this.mListClickListener = onListClickListener ;
+
     }
+
+
 
     @NonNull
     @Override

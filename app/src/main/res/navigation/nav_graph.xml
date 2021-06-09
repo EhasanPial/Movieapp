@@ -95,7 +95,7 @@
     <fragment
         android:id="@+id/searchMenu"
         android:name="ui.Search"
-        android:label="fragment_search"
+        android:label="Search"
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchMenu_to_detailsActivity"
@@ -108,7 +108,7 @@
     <fragment
         android:id="@+id/favourites"
         android:name="ui.Favourites"
-        android:label="fragment_favourites"
+        android:label="Favourites"
         tools:layout="@layout/fragment_favourites">
         <action
             android:id="@+id/action_favourites_to_detailsActivity"
@@ -150,7 +150,7 @@
     <fragment
         android:id="@+id/registration"
         android:name="Firebase.Registration"
-        android:label="fragment_registration"
+        android:label="Registration"
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registration_to_posts"
@@ -174,7 +174,7 @@
     <fragment
         android:id="@+id/signOut2"
         android:name="Firebase.SignOut"
-        android:label="fragment_sign_out"
+        android:label="Sign Out"
         tools:layout="@layout/fragment_sign_out" >
         <action
             android:id="@+id/action_signOut2_to_mainFragment"
@@ -185,7 +185,7 @@
     <fragment
         android:id="@+id/comment"
         android:name="Firebase.Comment"
-        android:label="fragment_comment"
+        android:label="Comment"
         tools:layout="@layout/fragment_comment" >
         <argument
             android:name="postID"
@@ -203,7 +203,7 @@
     <fragment
         android:id="@+id/type"
         android:name="ui.Type"
-        android:label="fragment_type"
+
         tools:layout="@layout/fragment_type" >
         <argument
             android:name="type"

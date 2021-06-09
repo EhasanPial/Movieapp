@@ -93,7 +93,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
-            onClick.OnClickListener(pos);
+            onClick.OnClickListener(pos+1);
         }
     }
 }

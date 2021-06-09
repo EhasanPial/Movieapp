@@ -17,10 +17,12 @@ import retrofit2.Response;
 public class TypeLoadBefore extends PageKeyedDataSource<Long, Movie> {
     private ApiInterface apiInterface;
     private Application application;
+    private String genre;
 
-    public TypeLoadBefore(ApiInterface movieDataService, Application application) {
+    public TypeLoadBefore(ApiInterface movieDataService, Application application, String genre) {
         this.apiInterface = movieDataService;
         this.application = application;
+        this.genre = genre ;
     }
 
     @Override
@@ -28,11 +30,11 @@ public class TypeLoadBefore extends PageKeyedDataSource<Long, Movie> {
 
         apiInterface = ApiService.getApiInterface();
 
-        apiInterface.getTypeMovie(BaseString.API, "27", 1).enqueue(new Callback<MovieList>() {
+        apiInterface.getTypeMovie(BaseString.API, genre, 1).enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
                 int statusCode = response.code();
-                Log.d(TopRatedLoadBefore.class.getSimpleName(), "onResponse: " + statusCode);
+                Log.d("type", genre);
                 if (response.isSuccessful()) {
                     MovieList mutableLiveData = response.body();
                     List<Movie> movieList;
@@ -61,7 +63,7 @@ public class TypeLoadBefore extends PageKeyedDataSource<Long, Movie> {
     public void loadAfter(@NonNull PageKeyedDataSource.LoadParams<Long> params, @NonNull PageKeyedDataSource.LoadCallback<Long, Movie> callback) {
         apiInterface = ApiService.getApiInterface();
 
-        apiInterface.getTypeMovie(BaseString.API, "27", params.key).enqueue(new Callback<MovieList>() {
+        apiInterface.getTypeMovie(BaseString.API, genre, params.key).enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
                 int statusCode = response.code();
