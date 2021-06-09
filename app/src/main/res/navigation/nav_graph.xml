@@ -195,5 +195,18 @@
         android:id="@+id/catagories"
         android:name="ui.Catagories"
         android:label="Categories"
-        tools:layout="@layout/fragment_catagories" />
+        tools:layout="@layout/fragment_catagories" >
+        <action
+            android:id="@+id/action_catagories_to_type"
+            app:destination="@id/type" />
+    </fragment>
+    <fragment
+        android:id="@+id/type"
+        android:name="ui.Type"
+        android:label="fragment_type"
+        tools:layout="@layout/fragment_type" >
+        <argument
+            android:name="type"
+            app:argType="integer" />
+    </fragment>
 </navigation>

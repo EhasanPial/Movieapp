@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +23,7 @@ import Model.CategoryModel;
 import adapter.CategoryAdapter;
 
 
-public class Catagories extends Fragment {
+public class Catagories extends Fragment implements CategoryAdapter.OnClick {
 
 
     private RecyclerView recyclerView ;
@@ -52,11 +54,18 @@ public class Catagories extends Fragment {
         categoryModels.add(new CategoryModel(6,"Thriller")) ;
         categoryModels.add(new CategoryModel(7,"Drama")) ;
 
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getContext()) ;
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), this) ;
 
         categoryAdapter.setCategoryModels(categoryModels) ;
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(categoryAdapter);
 
+    }
+
+    @Override
+    public void OnClickListener(int type) {
+        NavController navController = Navigation.findNavController(getView());
+        CatagoriesDirections.ActionCatagoriesToType actionCatagoriesToType = CatagoriesDirections.actionCatagoriesToType(type);
+        navController.navigate(actionCatagoriesToType);
     }
 }

@@ -98,6 +98,28 @@ public class ApiService {
 
 
     }
+    public LiveData<List<Movie>> getTypeMovie(String apiKey,String genre, Long page) {
+        final MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
+        apiInterface.getTypeMovie(apiKey, genre, page).enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+                int statusCode = response.code();
+                Log.d(ApiService.class.getSimpleName(), "onResponse: " + statusCode);
+                if (response.isSuccessful())
+                    mutableLiveData.setValue(response.body().getMovieResults());
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+                mutableLiveData.setValue(null);
+                Log.e(ApiService.class.getSimpleName(), "onResponse: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+        return mutableLiveData;
+
+
+    }
 
     public LiveData<MovieDetails> getMovieDetails(String apiKey, int id) {
         final MutableLiveData<MovieDetails> movieDetailsMutableLiveData = new MutableLiveData<>();

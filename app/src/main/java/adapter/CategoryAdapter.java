@@ -19,11 +19,15 @@ import java.util.List;
 import Model.CategoryModel;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+
     List<CategoryModel> categoryModels;
     private Context context;
+    private OnClick onClick;
 
-    public CategoryAdapter(Context context) {
+    public CategoryAdapter(Context context, OnClick onClick) {
+
         this.context = context;
+        this.onClick = onClick;
     }
 
     @NonNull
@@ -69,7 +73,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         return categoryModels.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public interface OnClick {
+        void OnClickListener(int type);
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         ImageView back;
 
@@ -78,6 +86,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
             name = itemView.findViewById(R.id.cat_name);
             back = itemView.findViewById(R.id.back_cat_img);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int pos = getAdapterPosition();
+            onClick.OnClickListener(pos);
         }
     }
 }
