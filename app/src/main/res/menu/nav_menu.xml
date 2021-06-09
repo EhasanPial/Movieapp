@@ -5,7 +5,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/mainFragment"
-            android:icon="@drawable/ic_outline_play_circle_outline_24"
+            android:icon="@drawable/ic_baseline_home_24"
             android:title="Home" />
         <item
             android:id="@+id/popularMovies"
@@ -23,6 +23,10 @@
             android:id="@+id/favourites"
             android:icon="@drawable/ic_baseline_favorite_border_24"
             android:title="Favorites" />
+        <item
+            android:id="@+id/catagories"
+            android:icon="@drawable/ic_baseline_category_24"
+            android:title="Category" />
 
     </group>
 
@@ -33,18 +37,18 @@
 
                 <item
                     android:id="@+id/login"
-                    android:icon="@drawable/ic_baseline_favorite_border_24"
+                    android:icon="@drawable/ic_baseline_person_24"
                     android:title="Login/SignUp" />
 
 
                 <item
                     android:id="@+id/posts"
-                    android:icon="@drawable/ic_baseline_favorite_border_24"
+                    android:icon="@drawable/ic_baseline_forum_24"
                     android:title="Forum" />
 
                 <item
                     android:id="@+id/action_mainFragment_to_signOut2"
-                    android:icon="@drawable/ic_baseline_favorite_border_24"
+                    android:icon="@drawable/ic_baseline_login_24"
                     android:title="Sign Out" />
 
 

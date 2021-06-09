@@ -53,6 +53,9 @@
             app:destination="@id/signOut2"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_catagories"
+            app:destination="@id/catagories" />
     </fragment>
     <fragment
         android:id="@+id/popularMovies"
@@ -188,4 +191,9 @@
             android:name="postID"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/catagories"
+        android:name="ui.Catagories"
+        android:label="Categories"
+        tools:layout="@layout/fragment_catagories" />
 </navigation>
