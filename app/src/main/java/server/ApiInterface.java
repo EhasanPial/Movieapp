@@ -34,14 +34,12 @@ public interface ApiInterface {
     Call<VideoList> getVideos(@Path("movie_id") int id, @Query("api_key") String apiKey);
 
     @GET("discover/movie")
-    Call<MovieList> getTypeMovie( @Query("api_key") String apiKey,@Query("with_genres") String with_genre, @Query("page") long page);
+    Call<MovieList> getTypeMovie(@Query("api_key") String apiKey, @Query("with_genres") String with_genre, @Query("page") long page);
 
     @GET("search/movie")
-    Call<MovieList> getSearchedMovies(@Query("query") String query , @Query("api_key") String apiKey);
+    Call<MovieList> getSearchedMovies(@Query("query") String query, @Query("api_key") String apiKey);
 
-
-
-
-
+    @GET("movie/upcoming")
+    Call<MovieList> getupcommingmovies(@Query("api_key") String apiKey, @Query("page") long page);
 
 }

@@ -100,6 +100,32 @@ public class ApiService {
 
 
     }
+
+    public LiveData<List<Movie>> getupcommingMovies(String apiKey, Long page) {
+        final MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
+        apiInterface.getupcommingmovies(apiKey, page).enqueue(new Callback<MovieList>() {
+            @Override
+            public void onResponse(@NotNull Call<MovieList> call, @NotNull Response<MovieList> response) {
+                int statusCode = response.code();
+                Log.d(ApiService.class.getSimpleName(), "onResponse: " + statusCode);
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
+                    mutableLiveData.setValue(response.body().getMovieResults());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieList> call, Throwable t) {
+                mutableLiveData.setValue(null);
+                Log.e(ApiService.class.getSimpleName(), "onResponse: " + t.getMessage());
+                t.printStackTrace();
+            }
+        });
+        return mutableLiveData;
+
+
+    }
+
     public LiveData<List<Video>> getVideo(String apiKey, int id) {
         final MutableLiveData<List<Video>> mutableLiveData = new MutableLiveData<>();
         apiInterface.getVideos(id, apiKey).enqueue(new Callback<VideoList>() {
@@ -124,7 +150,6 @@ public class ApiService {
 
 
     }
-
 
 
     public LiveData<MovieDetails> getMovieDetails(String apiKey, int id) {
@@ -175,10 +200,9 @@ public class ApiService {
     }
 
 
-
     public LiveData<List<Review>> getReviews(String apiKey, int id) {
-            final MutableLiveData<List<Review>> reviews = new MutableLiveData<>();
-            apiInterface.getReviews(id, apiKey).enqueue(new Callback<ReviewList>() {
+        final MutableLiveData<List<Review>> reviews = new MutableLiveData<>();
+        apiInterface.getReviews(id, apiKey).enqueue(new Callback<ReviewList>() {
             @Override
             public void onResponse(@NotNull Call<ReviewList> call, @NotNull Response<ReviewList> response) {
                 int statusCode = response.code();
@@ -186,7 +210,7 @@ public class ApiService {
                 if (response.isSuccessful())
                     reviews.setValue(response.body().getResult());
 
-               else if (response.body().getResult() == null) {
+                else if (response.body().getResult() == null) {
                     Log.d("Reviews", "null service");
                 }
             }
@@ -203,14 +227,14 @@ public class ApiService {
     }
 
 
-  public LiveData<List<Movie>> getSearchedMovies(String apiKey, String query) {
-            final MutableLiveData<List<Movie>> reviews = new MutableLiveData<>();
-            apiInterface.getSearchedMovies(query, apiKey).enqueue(new Callback<MovieList>() {
+    public LiveData<List<Movie>> getSearchedMovies(String apiKey, String query) {
+        final MutableLiveData<List<Movie>> reviews = new MutableLiveData<>();
+        apiInterface.getSearchedMovies(query, apiKey).enqueue(new Callback<MovieList>() {
             @Override
             public void onResponse(@NotNull Call<MovieList> call, @NotNull Response<MovieList> response) {
                 int statusCode = response.code();
                 Log.d("Search", "onResponse: " + statusCode);
-                if (response.isSuccessful() )
+                if (response.isSuccessful())
                     reviews.setValue(response.body().getMovieResults());
             }
 
@@ -224,10 +248,6 @@ public class ApiService {
 
         return reviews;
     }
-
-
-
-
 
 
 }

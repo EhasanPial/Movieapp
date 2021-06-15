@@ -75,6 +75,10 @@ public class Repository {
         return apiService.getTopRatedMovies(apiKey, page);
     }
 
+    public LiveData<List<Movie>> getupcommingMovies(String apiKey, Long page) {
+        return apiService.getupcommingMovies(apiKey, page);
+    }
+
     public LiveData<MovieDetails> getMovieDetails(String apiKey, int id) {
         return apiService.getMovieDetails(apiKey, id);
     }

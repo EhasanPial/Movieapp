@@ -1,12 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Firebase.Registration"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/action_poster">
+    android:background="@drawable/login_back"
+    >
 
 
 
@@ -19,6 +18,20 @@
         android:layout_marginRight="30dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Login"
+            android:textStyle="bold"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Please login to continue"
+              />
 
 
         <com.google.android.material.textfield.TextInputLayout

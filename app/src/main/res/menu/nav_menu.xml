@@ -11,6 +11,11 @@
             android:id="@+id/catagories"
             android:icon="@drawable/ic_baseline_category_24"
             android:title="Category" />
+
+        <item
+            android:id="@+id/upcommingMovies"
+            android:icon="@drawable/ic_baseline_access_time_filled_24"
+            android:title="Upcoming Movies" />
         <item
             android:id="@+id/popularMovies"
             android:icon="@drawable/ic_outline_play_circle_outline_24"
