@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    public TextView userName;
-    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +48,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        firebaseAuth = FirebaseAuth.getInstance();
-        userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
-        if (firebaseAuth.getCurrentUser() != null) {
 
-            userName.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        }
+
 
 
     }

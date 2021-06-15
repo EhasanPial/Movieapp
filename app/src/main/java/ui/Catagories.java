@@ -53,6 +53,13 @@ public class Catagories extends Fragment implements CategoryAdapter.OnClick {
         categoryModels.add(new CategoryModel(5,"Si-Fi")) ;
         categoryModels.add(new CategoryModel(6,"Thriller")) ;
         categoryModels.add(new CategoryModel(7,"Drama")) ;
+        categoryModels.add(new CategoryModel(8,"Adventure")) ;
+        categoryModels.add(new CategoryModel(9,"Animation")) ;
+        categoryModels.add(new CategoryModel(10,"Crime")) ;
+        categoryModels.add(new CategoryModel(11,"Documentary")) ;
+        categoryModels.add(new CategoryModel(12,"Family")) ;
+        categoryModels.add(new CategoryModel(13,"War")) ;
+        categoryModels.add(new CategoryModel(14,"Mystery")) ;
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), this) ;
 

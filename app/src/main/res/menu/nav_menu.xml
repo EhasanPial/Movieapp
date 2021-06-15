@@ -8,6 +8,10 @@
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Home" />
         <item
+            android:id="@+id/catagories"
+            android:icon="@drawable/ic_baseline_category_24"
+            android:title="Category" />
+        <item
             android:id="@+id/popularMovies"
             android:icon="@drawable/ic_outline_play_circle_outline_24"
             android:title="Popular Movies" />
@@ -23,14 +27,11 @@
             android:id="@+id/favourites"
             android:icon="@drawable/ic_baseline_favorite_border_24"
             android:title="Favorites" />
-        <item
-            android:id="@+id/catagories"
-            android:icon="@drawable/ic_baseline_category_24"
-            android:title="Category" />
+
 
     </group>
 
-    <group android:checkableBehavior="all">
+    <group  android:checkableBehavior="single">
 
         <item android:title="Discussion">
             <menu>

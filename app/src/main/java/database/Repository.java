@@ -11,6 +11,7 @@ import Model.Cast;
 import Model.Movie;
 import Model.MovieDetails;
 import Model.Review;
+import Model.Video;
 import server.ApiService;
 
 public class Repository {
@@ -36,7 +37,7 @@ public class Repository {
             @Override
             public void run() {
                 mDao.insertMovie(movie);
-                Log.d("Room","Inserted") ;
+                Log.d("Room", "Inserted");
 
             }
         });
@@ -47,7 +48,7 @@ public class Repository {
             @Override
             public void run() {
                 mDao.delete(movie);
-                Log.d("Room","Deleted") ;
+                Log.d("Room", "Deleted");
 
             }
         });
@@ -59,8 +60,14 @@ public class Repository {
     }
 
     /* ---- Network ---- */
+
     public LiveData<List<Movie>> getPopularMovies(String apiKey, Long page) {
         return apiService.getPopularMovies(apiKey, page);
+
+    }
+
+    public LiveData<List<Video>> getVideo(String apiKey, int id) {
+        return apiService.getVideo(apiKey, id);
 
     }
 
@@ -81,6 +88,6 @@ public class Repository {
     }
 
     public LiveData<List<Movie>> getSearchedMovies(String apiKey, String query) {
-        return  apiService.getSearchedMovies(apiKey, query) ;
+        return apiService.getSearchedMovies(apiKey, query);
     }
 }

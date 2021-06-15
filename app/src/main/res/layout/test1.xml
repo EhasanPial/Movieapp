@@ -4,96 +4,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/teal_100"
     android:layout_margin="8dp"
+    android:layout_marginBottom="12dp"
+    android:background="#FBF9F9"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FAF4F4F4"
         android:weightSum="3">
 
-        <ImageView
-            android:id="@+id/forum_image_view_id"
-            android:layout_width="165dp"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:scaleType="fitXY"
-            android:src="@drawable/movie_poster"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/forum_image_view_id"
+                android:layout_width="165dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/action_poster" />
+        </com.google.android.material.card.MaterialCardView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="2">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/formu_title_id"
-                style="@style/TextAppearance.AppCompat.Medium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="3"
-                android:padding="5dp"
-                android:text="Movie: Title"
-                android:layout_marginStart="12dp"
-                android:textStyle="bold"/>
-
-
-            <TextView
-                android:id="@+id/forum_rating_id"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:padding="5dp"
-                android:text="Rating: 7.6" />
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:text="Movie: " />
+
+                <TextView
+                    android:id="@+id/formu_title_id"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:textColor="@color/black"
+                    android:text="Title" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+
+                    android:text="Rating: " />
+
+                <TextView
+                    android:id="@+id/forum_rating_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7.6" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/forum_dex_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:padding="15dp" />
+        android:background="#FFFFFF"
+        android:padding="15dp"
+        />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/browser_actions_bg_grey" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white"
-        android:weightSum="3"
-        android:elevation="5dp"
-        android:padding="8dp">
+        android:background="#FFFDFD"
+        android:weightSum="3">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            tools:ignore="UselessParent">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/upText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="30"
-                android:textColor="@android:color/holo_green_dark"
-                android:textStyle="bold"/>
+                android:textColor="#4CAF50"
+                android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_up_vote"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Up Vote"
-                android:textColor="@android:color/holo_green_light" />
+                android:textAllCaps="false"
+                android:textColor="#4CAF50" />
 
 
         </LinearLayout>
@@ -102,9 +141,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_weight="1"
-            tools:ignore="UselessParent">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/downText"
@@ -112,16 +150,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="30"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_dwn_vote"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Down Vote"
-                android:textColor="@android:color/holo_red_light" />
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent" />
 
 
         </LinearLayout>
@@ -131,20 +170,19 @@
             android:id="@+id/linearLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:gravity="center">
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/comments_button"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+
                 android:text="Comments"
-                android:textColor="@android:color/holo_green_light"
-                tools:layout_editor_absoluteX="116dp"
-                tools:layout_editor_absoluteY="197dp" />
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary" />
 
 
         </LinearLayout>
@@ -152,6 +190,13 @@
 
     </LinearLayout>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#DAD9D9" />
 
 </LinearLayout>
 

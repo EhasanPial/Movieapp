@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Firebase.Registration">
+    tools:context="Firebase.Registration"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/action_poster">
+
+
 
 
     <LinearLayout
@@ -15,17 +20,22 @@
         android:orientation="vertical">
 
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp">
+            app:startIconDrawable="@android:drawable/sym_action_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:padding="5dp"
+            android:hint="Email"
+            >
 
             <EditText
                 android:id="@+id/login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="Email"
+
+
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -36,15 +46,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true">
+            android:hint="Password"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@android:drawable/ic_lock_lock">
 
             <EditText
                 android:id="@+id/login_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="Password"
+
                 android:inputType="textPassword"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>

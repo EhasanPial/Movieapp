@@ -178,7 +178,7 @@ public class Forum extends Fragment {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
 
-                    boolean success = forumViewModel.writeData(postTime, editText.getText().toString(), "Pial", downloadUri.toString() , 0, title.getText().toString(), null);
+                    boolean success = forumViewModel.writeData(postTime, editText.getText().toString(), "Pial", downloadUri.toString() , rating.getText().toString(), title.getText().toString(), null);
                     if (success) {
                         Snackbar.make(getView(), "Posted", BaseTransientBottomBar.LENGTH_SHORT).show();
                         NavController navController = Navigation.findNavController(v);

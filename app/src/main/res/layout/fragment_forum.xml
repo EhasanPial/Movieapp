@@ -3,81 +3,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Firebase.Forum"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="Firebase.Forum">
+
     <ProgressBar
         android:id="@+id/post_progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:padding="5dp"
-
-        android:visibility="invisible"
-        />
+        android:layout_marginBottom="5dp"
+        android:visibility="gone" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:padding="8dp">
 
-        <EditText
-            android:id="@+id/post_title"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
-            android:maxLines="2"
-            android:padding="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/post_rating_id"
+            <EditText
+                android:id="@+id/post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Title"
+                android:inputType="text"
+
+                android:maxLines="2" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Personal: 7.5"
+            android:inputType="text"
 
-            android:maxLines="2"
-            android:padding="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_title" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
-        <EditText
-            android:id="@+id/post_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:ems="10"
-            android:fontFamily="@font/alice"
-            android:hint="@string/what_s_on_your_mind"
+            <EditText
+                android:id="@+id/post_rating_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Rating"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/post_title" />
 
-            android:inputType="textPersonName"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_rating_id" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+            <EditText
+                android:id="@+id/post_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/what_s_on_your_mind"
+                android:inputType="textPersonName" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-        android:id="@+id/post_button_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Post"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/post_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/post_edit_text" />
+            android:id="@+id/post_button_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="Post"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
         <Button
             android:id="@+id/post_photo_id"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Select Photo"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_edit_text" />
+            app:layout_constraintTop_toTopOf="@+id/post_button_id" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

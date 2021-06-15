@@ -204,9 +204,13 @@
         android:id="@+id/type"
         android:name="ui.Type"
 
-        tools:layout="@layout/fragment_type" >
+        android:label="Category"
+        tools:layout="@layout/fragment_type">
         <argument
             android:name="type"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_type_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
 </navigation>

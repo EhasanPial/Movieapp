@@ -7,6 +7,6 @@
     <string name="todo">TODO</string>
     <string name="name">Name</string>
     <string name="textview">TextView</string>
-    <string name="what_s_on_your_mind">Write about a movie...</string>
+    <string name="what_s_on_your_mind">Write about this movie...</string>
 
 </resources>

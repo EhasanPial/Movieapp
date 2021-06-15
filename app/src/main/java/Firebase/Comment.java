@@ -67,6 +67,8 @@ public class Comment extends Fragment {
         msg_comment = view.findViewById(R.id.reply_msg);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Comments");
+
+
         firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -131,6 +133,7 @@ public class Comment extends Fragment {
         ReplyModel replyModel = new ReplyModel(msg, userID);
 
         if (!msg.isEmpty()) {
+
             databaseReference.child(postID).child(commentTime + "").setValue(replyModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -149,6 +152,9 @@ public class Comment extends Fragment {
 
                 }
             });
+
+            msg_comment.setText("");
+            msg_comment.clearFocus();
         }
     }
 }

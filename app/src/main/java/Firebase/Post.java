@@ -7,7 +7,7 @@ public class Post {
     private String des;
     private String username;
     private String img;
-    private float rating;
+    private String rating;
     private String movieTitle;
     private List<Comments> commentsList;
 
@@ -15,7 +15,7 @@ public class Post {
     }
 
 
-    public Post(long id, String des, String username, String img, float rating, String movieTitle, List<Comments> commentsList) {
+    public Post(long id, String des, String username, String img, String rating, String movieTitle, List<Comments> commentsList) {
         this.id = id;
         this.des = des;
         this.username = username;
@@ -58,11 +58,11 @@ public class Post {
     }
 
 
-    public float getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

@@ -81,8 +81,8 @@ public class Login extends Fragment {
 
             FirebaseDatabase.getInstance().getReference().child("Users").child(uid).addValueEventListener(valueEventListener) ;
             NavigationView navView = getActivity().findViewById(R.id.nav_view);
-            userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
-            userName.setText(firebaseAuth.getCurrentUser().getEmail());
+         //   userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
+          //  userName.setText(firebaseAuth.getCurrentUser().getEmail());
             navController.navigate(R.id.action_login_to_posts);
         }
 
@@ -102,7 +102,7 @@ public class Login extends Fragment {
                 signIn.setEnabled(false);
                 String emailText = email.getText().toString();
                 String passText = password.getText().toString();
-                userName = view.findViewById(R.id.nav_header_userName);
+               // userName = view.findViewById(R.id.nav_header_userName);
                 if (!(emailText.isEmpty()) && !(passText.isEmpty())) {
                     firebaseAuth.signInWithEmailAndPassword(emailText, passText)
                             .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {

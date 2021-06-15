@@ -7,6 +7,7 @@ import Model.Movie;
 import Model.MovieDetails;
 import Model.MovieList;
 import Model.ReviewList;
+import Model.VideoList;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -28,11 +29,17 @@ public interface ApiInterface {
 
     @GET("movie/{movie_id}/reviews")
     Call<ReviewList> getReviews(@Path("movie_id") int id, @Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/videos")
+    Call<VideoList> getVideos(@Path("movie_id") int id, @Query("api_key") String apiKey);
+
     @GET("discover/movie")
     Call<MovieList> getTypeMovie( @Query("api_key") String apiKey,@Query("with_genres") String with_genre, @Query("page") long page);
 
     @GET("search/movie")
     Call<MovieList> getSearchedMovies(@Query("query") String query , @Query("api_key") String apiKey);
+
+
 
 
 

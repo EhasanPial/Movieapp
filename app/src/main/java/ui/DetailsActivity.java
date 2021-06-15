@@ -1,8 +1,10 @@
 package ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,7 @@ import Model.Genre;
 import Model.Movie;
 import Model.MovieDetails;
 import Model.Review;
+import Model.Video;
 import adapter.ViewPageAdapter;
 import server.ApiService;
 import server.BaseString;
@@ -75,7 +78,7 @@ public class DetailsActivity extends Fragment {
     private TabLayout tabLayout;
     private FloatingActionButton floatingActionButton;
     private boolean isFav;
-
+    private String key = null;
 
     private int id;
     private DetailsViewModel detailsViewModel;
@@ -93,8 +96,6 @@ public class DetailsActivity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         backPoster = view.findViewById(R.id.detail_header_movie_backdrop);
-
-
         runtime = view.findViewById(R.id.detail_movie_runtime);
         genre = view.findViewById(R.id.detail_movie_certification_genre);
         toolbar = view.findViewById(R.id.detail_toolbar_main);
@@ -104,20 +105,18 @@ public class DetailsActivity extends Fragment {
 
 
         NavController navController = Navigation.findNavController(view);
-
         NavigationUI.setupWithNavController(toolbar, navController);
 
 
         DetailsActivityArgs detailsActivityArgs = DetailsActivityArgs.fromBundle(getArguments());
-
         detailsActivityArgs.getMoviepass();
         movie = detailsActivityArgs.getMoviepass();
         id = movie.getId();
 
         detailsViewModel = new ViewModelProvider(requireActivity()).get(DetailsViewModel.class);
         detailsViewModel.selectMovie(movie);
-
         detailsViewModel.passId(id);
+
         loadMovieDetails();
 
         addFav();
@@ -131,6 +130,28 @@ public class DetailsActivity extends Fragment {
                 .load(BaseString.POSTER_PATH + movie.getPoster_path())
                 .error(R.drawable.bg_overlay)
                 .into(backPoster);
+
+        detailsViewModel.getVideo(BaseString.API, id).observe(getViewLifecycleOwner(), new Observer<List<Video>>() {
+            @Override
+            public void onChanged(List<Video> videos) {
+                if (videos != null) {
+                    Video video = videos.get(0);
+                    key = video.getKey();
+                }
+                else
+                    Log.d("video", "NULL") ;
+            }
+        });
+        backPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    String trailerUrl = BaseString.YT_BASE_URL + key;
+                    Intent startIntentToYoutube = new Intent(Intent.ACTION_VIEW, Uri.parse(trailerUrl));
+                    getActivity().startActivity(startIntentToYoutube);
+
+            }
+        });
 
 
         viewPager = view.findViewById(R.id.viewPager);
@@ -172,12 +193,14 @@ public class DetailsActivity extends Fragment {
                     floatingActionButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_baseline_favorite_24));
                     detailsViewModel.saveMovie(movie);
 
-                    Snackbar.make(getView(),"Added", BaseTransientBottomBar.LENGTH_SHORT).show(); ;
+                    Snackbar.make(getView(), "Added", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    ;
 
                 } else {
                     floatingActionButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_baseline_favorite_border_24));
                     detailsViewModel.deleteMovie(movie);
-                    Snackbar.make(getView(),"Removed", BaseTransientBottomBar.LENGTH_SHORT).show(); ;
+                    Snackbar.make(getView(), "Removed", BaseTransientBottomBar.LENGTH_SHORT).show();
+                    ;
 
 
                 }

@@ -101,8 +101,8 @@ public class Posts extends Fragment {
 
 
         NavigationView navView = getActivity().findViewById(R.id.nav_view);
-        TextView userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
-        userName.setText(mAuth.getCurrentUser().getEmail());
+      //  TextView userName = navView.getHeaderView(0).findViewById(R.id.nav_header_userName);
+     //   userName.setText(mAuth.getCurrentUser().getEmail());
 
 
         likeRef = FirebaseDatabase.getInstance().getReference().child("Likes");

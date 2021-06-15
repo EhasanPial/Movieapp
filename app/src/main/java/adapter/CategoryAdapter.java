@@ -57,6 +57,29 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.thriller_poster, null));
         } else if (type == 7) {
             holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.darama_poster, null));
+
+        } else if (type == 8) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.advanture_poster, null));
+
+        } else if (type == 9) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.animation_poster, null));
+
+        } else if (type == 10) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.crime_poster, null));
+
+        } else if (type == 11) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.documentry_poster, null));
+
+        } else if (type == 12) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.family_poster, null));
+
+        }else if (type == 13) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.war_poster, null));
+
+        }
+else if (type == 14) {
+            holder.back.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.mystery_poster, null));
+
         }
 
     }
@@ -93,7 +116,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
-            onClick.OnClickListener(pos+1);
+            onClick.OnClickListener(pos + 1);
         }
     }
 }

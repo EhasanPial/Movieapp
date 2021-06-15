@@ -16,6 +16,8 @@ import Model.MovieDetails;
 import Model.MovieList;
 import Model.Review;
 import Model.ReviewList;
+import Model.Video;
+import Model.VideoList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -98,19 +100,21 @@ public class ApiService {
 
 
     }
-    public LiveData<List<Movie>> getTypeMovie(String apiKey,String genre, Long page) {
-        final MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
-        apiInterface.getTypeMovie(apiKey, genre, page).enqueue(new Callback<MovieList>() {
+    public LiveData<List<Video>> getVideo(String apiKey, int id) {
+        final MutableLiveData<List<Video>> mutableLiveData = new MutableLiveData<>();
+        apiInterface.getVideos(id, apiKey).enqueue(new Callback<VideoList>() {
             @Override
-            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
+            public void onResponse(Call<VideoList> call, Response<VideoList> response) {
                 int statusCode = response.code();
-                Log.d(ApiService.class.getSimpleName(), "onResponse: " + statusCode);
-                if (response.isSuccessful())
-                    mutableLiveData.setValue(response.body().getMovieResults());
+
+                if (response.isSuccessful()) {
+                    mutableLiveData.setValue(response.body().getVideoList());
+                    Log.d("Video", "onResponse: " + statusCode);
+                }
             }
 
             @Override
-            public void onFailure(Call<MovieList> call, Throwable t) {
+            public void onFailure(Call<VideoList> call, Throwable t) {
                 mutableLiveData.setValue(null);
                 Log.e(ApiService.class.getSimpleName(), "onResponse: " + t.getMessage());
                 t.printStackTrace();
@@ -120,6 +124,8 @@ public class ApiService {
 
 
     }
+
+
 
     public LiveData<MovieDetails> getMovieDetails(String apiKey, int id) {
         final MutableLiveData<MovieDetails> movieDetailsMutableLiveData = new MutableLiveData<>();

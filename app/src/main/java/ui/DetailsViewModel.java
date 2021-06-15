@@ -18,6 +18,7 @@ import Model.Cast;
 import Model.Movie;
 import Model.MovieDetails;
 import Model.Review;
+import Model.Video;
 import database.Repository;
 import server.ApiInterface;
 import server.ApiService;
@@ -28,11 +29,12 @@ public class DetailsViewModel extends AndroidViewModel {
 
     private Repository repository;
     private LiveData<MovieDetails> movieList;
+    private LiveData<List<Video>> videoLiveData;
     private LiveData<List<Cast>> castLiveData;
     private LiveData<List<Review>> reviewLiveData;
     private MutableLiveData<Movie> movieLiveData;
     private MutableLiveData<MovieDetails> movieDetailsMutableLiveData;
-    private MutableLiveData<Integer> movie_id ;
+    private MutableLiveData<Integer> movie_id;
 
 
     public DetailsViewModel(@NonNull Application application) {
@@ -42,8 +44,9 @@ public class DetailsViewModel extends AndroidViewModel {
         movieLiveData = new MutableLiveData<>();
         movieDetailsMutableLiveData = new MutableLiveData<>();
         reviewLiveData = new MutableLiveData<>();
-        castLiveData = new MutableLiveData<>() ;
-        movie_id= new MutableLiveData<>() ;
+        castLiveData = new MutableLiveData<>();
+        videoLiveData = new MutableLiveData<>();
+        movie_id = new MutableLiveData<>();
 
 
     }
@@ -69,12 +72,16 @@ public class DetailsViewModel extends AndroidViewModel {
         return movieList = repository.getMovieDetails(apikey, id);
     }
 
+    public LiveData<List<Video>> getVideo(String apikey, int id) {
+        return videoLiveData = repository.getVideo(apikey, id);
+    }
+
     public LiveData<List<Cast>> getCast(String apikey, int id) {
         return castLiveData = repository.getCast(apikey, id);
     }
 
     public LiveData<List<Review>> getReviews(String apikey, int id) {
-        return  reviewLiveData = repository.getRevies(apikey, id);
+        return reviewLiveData = repository.getRevies(apikey, id);
     }
 
     /* ----- Sharing Data ----- */
@@ -94,14 +101,12 @@ public class DetailsViewModel extends AndroidViewModel {
         return movieDetailsMutableLiveData;
     }
 
-    public  void passId(Integer id)
-    {
+    public void passId(Integer id) {
 
         movie_id.setValue(id);
     }
 
-    public MutableLiveData<Integer> getId()
-    {
+    public MutableLiveData<Integer> getId() {
         return movie_id;
     }
 
